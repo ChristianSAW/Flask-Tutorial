@@ -30,10 +30,14 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
-    # a simple home page 
-    @app.route('/')
-    def home():
-        return 'YEEEEEEEEET'
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index',view_func=blog.index) # doen't seem to be necessary. 
+
+    # # a simple home page 
+    # @app.route('/')
+    # def home():
+    #     return 'YEEEEEEEEET'
 
     # Test 
     @app.route('/<name>')
